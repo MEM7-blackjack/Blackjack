@@ -1,10 +1,10 @@
 class Card:
-    def __init__(self,num,id): #id is card image name
-        self.num = num
+    def __init__(self,id): #id is card image name
+        self.num = id[1:]
         self.id = id
     
     def getNum(self,total):
-        if self.num == "A":
+        if self.num == 1:
             if total <= 21:
                 return 11
             else:
