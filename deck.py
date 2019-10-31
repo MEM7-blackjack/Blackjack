@@ -3,8 +3,6 @@ from random import *
 class DeckList:
     def __init__(self):
         self.reset()
-    
-
 
     def reset(self):
         self.deck = []
