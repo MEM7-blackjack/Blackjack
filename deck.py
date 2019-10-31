@@ -1,5 +1,6 @@
 from card import *
 from random import *
+
 class DeckList:
     def __init__(self):
         self.reset()

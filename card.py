@@ -7,7 +7,7 @@ class Card:
     def getNum(self,total):
         """returns the number on the card"""
         if self.num == 1:
-            if total <= 21:
+            if total <= 10:
                 return 11
             else:
                 return 1

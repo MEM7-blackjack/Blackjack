@@ -5,6 +5,8 @@ from button import *
 
 def main():
     hit, stand, end, reset, win = graphic()
+
+    deck = DeckList()
     
 def graphic():
     win = GraphWin("Blackjack!", 800,500)
@@ -21,6 +23,11 @@ def graphic():
     end.activate()
     reset.activate()
     return hit, stand, end, reset, win
+
+
+def drawcardgraphics(loc,id,win): #loc is location of the new card represented by number of card in the list, win is for window
+# Add code for displaying drawing new card here: animation that draws a new card and moves it to the right place. 
+
+
     
-graphic()
- 
+main() 
