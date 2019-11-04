@@ -2,31 +2,51 @@ from card import *
 from deck import *
 from graphics import *
 from button import *
+from window import *
+from player import *
 
 def main():
-    hit, stand, end, reset, win = graphic()
+    #define window
+    win = GameWindow()
 
-    deck = DeckList()
+    #defines and draws the deck
+    deck = Deck(400,250,win.getWin())
+
+    #defines player
+    player = Player()
+    dealer = Player()
+
+
+
+def round():
+    #round function runs one round. 
+    # A round consists of 6 steps.
+
+    # 1. one card for player, revealed
+    # 2. one card for dealer, hidden
+    # 3. one card for player, revealed
+    # 4. one card for dealer, revealed
+    # 3. Player decides their play
+        # if hit
+            # one card for player, revealed
+                # check if total over 21
+                    # if total below 21, go back to 3
+                    # otherwise, player lose
+    # 4. repeat 3 until player stands or loses
+    # 5. dealer plays
+        # draws until their total hits 17 or higher.
+            # if dealer total over 21, player win
+    # 6. compare total.
+    # 7. closer to 21 wins
     
-def graphic():
-    win = GraphWin("Blackjack!", 800,500)
-    background_image = Image(Point(400,200),"table.png")
-    background_image.draw(win)
+    #playerloc and dealerloc decides where the hand should be displayed
+    playerLoc = Point(400,150)
+    dealerLoc = Point(400,350)
 
-    hit = Button(win, Point(300,300),60,30,"HIT")
-    stand = Button(win, Point(500,300),60,30,"STAND")
-    end = Button(win, Point(100,300),60,30,"EXIT")
-    reset = Button(win, Point(400,400),60,30,"RESET")
+    #win variable stores who wins the round.
+    win = 0
+    while win == 0:
 
-    hit.activate()
-    stand.activate()
-    end.activate()
-    reset.activate()
-    return hit, stand, end, reset, win
-
-
-def drawcardgraphics(loc,id,win): #loc is location of the new card represented by number of card in the list, win is for window
-# Add code for displaying drawing new card here: animation that draws a new card and moves it to the right place. 
 
 
     

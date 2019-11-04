@@ -1,7 +1,7 @@
 from card import Card
 
 class Player:
-    """Player is a class that holds the cardlist and calculates the total value of the cards"""
+    """Player is a class that holds the cardlist and calculates the total value of the cards. Call __init__ to reset card hand"""
     def __init__(self):
         self.cardlist = []
         self.cardtotal = 0
