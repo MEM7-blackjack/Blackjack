@@ -1,8 +1,10 @@
+from graphics import *
+
 class Card:
-    def __init__(self,id): #id is card image name
+    def __init__(self,id,side): #id is card image name
         self.num = int(id[1:])
         self.id = id
-        self.facedown = False
+        self.faceup = side
     
     def getNum(self,total):
         """returns the number on the card"""
@@ -18,10 +20,16 @@ class Card:
         """Example id: c1"""
         return self.id
 
-    def setSide(self,back):
+    def setSide(self,pt,side,gamewin):
         """back is a boolean value. True means the card is facing down"""
-        self.facedown = back 
+        if self.faceup != side:
+            self.faceup = side 
+            #draw new side
+            if self.faceup:
+                cardimage = Image(pt,"playingcards/"+self.id+".gif")
+                cardimage.draw(gamewin)
+            else:
+                cardimage = Image(pt,"playingcards/b1fv.gif")
+                cardimage.draw(gamewin)
 
-    def getSide(self):
-        """returns True if the card is facing down"""
-        return self.facedown
+            return cardimage

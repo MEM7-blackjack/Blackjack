@@ -7,10 +7,11 @@ class Deck:
         self.x = x
         self.y = y
         self.win = win
-        self.reset()
+        self.cardsOnBoard = []
         self.stack = Image(Point(x,y),"playingcards/b1fv.gif")
         self.stack.draw(self.win)
-        self.cardsOnBoard = []
+        self.reset()
+        
 
     def reset(self):
         #refills the deck
@@ -18,7 +19,7 @@ class Deck:
         suits = ["c","d","h","s"]
         for num in range(1,14):
             for suit in suits:
-                self.deck.append(Card(suit+str(num)))
+                self.deck.append(Card(suit+str(num),False))
 
         # Clears the cards on the board
         if len(self.cardsOnBoard) != 0:
@@ -37,12 +38,9 @@ class Deck:
         cardimageback.draw(self.win)
         cardimageback.move(desx-self.x,desy-self.y)
         self.cardsOnBoard.append(cardimageback)
-            
         if reveal:
-            cardimagefront = Image(cardimageback.getAnchor(),"playingcards/"+card+".gif")
-            cardimageback.undraw()
-            cardimagefront.draw(self.win)
-            self.cardsOnBoard.append(cardimagefront)
+            cardimage = card.setSide(cardimageback.getAnchor(),True,self.win)
+            self.cardsOnBoard.append(cardimage)
 
         return card
         
