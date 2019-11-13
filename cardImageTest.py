@@ -24,6 +24,7 @@ def main():
     rank = 12   #indicates queen
     #creates an image object from the file h12.gif by concatenating the above variables
     #note that rank must be string-ified before concatenating it with other strings!!
+    im.undraw()
     im = Image(Point(350, 250), "playingcards/" + suit + str(rank) + ".gif")
     im.draw(win)
     

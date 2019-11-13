@@ -30,14 +30,18 @@ def main():
         if gamewin.clickCheck(pt) == "start":
             winner = round(gamewin,deck,player,dealer)
             if winner == "Player":
-                text = drawtext(x,y,"Player Won","Black",gamewin.getWin())
+                text = drawtext(x,y,"Player Won","Black",25,gamewin.getWin())
             elif winner == "Dealer":
-                text = drawtext(x,y,"House Won","Black",gamewin.getWin())
+                text = drawtext(x,y,"House Won","Black",25,gamewin.getWin())
             else:
-                text = drawtext(x,y,"Tie","Black",gamewin.getWin())
+                text = drawtext(x,y,"Tie","Black",25,gamewin.getWin())
             sleep(1)
             text.undraw()
-            pt = gamewin.getWin().getMouse()
+            gamewin.end.activate()
+            gamewin.start.activate()
+            gamewin.hit.deactivate()
+            gamewin.stand.deactivate()
+        pt = gamewin.getWin().getMouse()
 
     gamewin.getWin().close()
 
@@ -45,6 +49,8 @@ def round(gamewin,deck,player,dealer):
     gamewin.end.deactivate()
     gamewin.start.deactivate()
     deck.reset()
+    player.reset()
+    dealer.reset()
     #playerloc and dealerloc decides where the hand should be displayed
     pCardLoc = Point(300,350)
     dCardLoc = Point(300,150)
@@ -102,13 +108,17 @@ def round(gamewin,deck,player,dealer):
         elif gamewin.clickCheck(pt) == "stand":
             # dealer turn
             playerturn = False
-    
+
+    deck.cardsOnBoard.append(dealer.getCardlist()[1].setSide(True,gamewin.getWin()))
+    print("start dealer turn")
     if playerLose == False:
         # 7. dealer plays
         while dealer.getCardTotal() < 17 and dealerLose == False:
             sleep(0.1)
+            print("dealer draws")
             drawDealer(dturnloopcount,dCardLoc,dealer,deck,True)
             if dealer.getCardTotal() > 21:
+                print("dealer total over 21")
                 dealerLose = True
             else:
                 dturnloopcount += 1
@@ -117,6 +127,7 @@ def round(gamewin,deck,player,dealer):
     
      # 8. compare total.
      # 9. closer to 21 wins
+    print("determine winner")
     if playerLose == False and dealerLose == False:
         if player.getCardTotal() > dealer.getCardTotal():
             dealerLose = True
@@ -138,8 +149,9 @@ def drawDealer(dturnloopcount,dCardLoc,dealer,deck,reveal):
     dCardLoc.move(dturnloopcount*20,0)
     dealer.addCard(deck.draw(dCardLoc,reveal))
 
-def drawtext(x,y,string,col,win): # Simple function to handle common operations for Text objects
+def drawtext(x,y,string,col,size,win): # Simple function to handle common operations for Text objects
     text = Text(Point(x,y),string)
+    text.setSize(size)
     text.setFill(col)
     text.draw(win)
     return text

@@ -5,6 +5,13 @@ class Card:
         self.num = int(id[1:])
         self.id = id
         self.faceup = side
+        self.cardimage = ""
+        self.x = 0
+        self.y = 0
+
+    def setPos(self,pt):
+        self.x = pt.getX()
+        self.y = pt.getY()
     
     def getNum(self,total):
         """returns the number on the card"""
@@ -20,16 +27,20 @@ class Card:
         """Example id: c1"""
         return self.id
 
-    def setSide(self,pt,side,gamewin):
+    def setSide(self,side,gamewin):
         """back is a boolean value. True means the card is facing down"""
         if self.faceup != side:
             self.faceup = side 
+
+            if isinstance(self.cardimage, Image):
+                self.cardimage.undraw()
+
             #draw new side
             if self.faceup:
-                cardimage = Image(pt,"playingcards/"+self.id+".gif")
-                cardimage.draw(gamewin)
+                self.cardimage = Image(Point(self.x,self.y),"playingcards/"+self.id+".gif")
+                self.cardimage.draw(gamewin)
             else:
-                cardimage = Image(pt,"playingcards/b1fv.gif")
-                cardimage.draw(gamewin)
+                self.cardimage = Image(Point(self.x,self.y),"playingcards/b1fv.gif")
+                self.cardimage.draw(gamewin)
 
-            return cardimage
+            return self.cardimage

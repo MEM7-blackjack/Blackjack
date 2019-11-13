@@ -33,6 +33,10 @@ class Player:
         else:
             return cardtotal
 
+    def reset(self):
+        self.cardlist = []
+        self.cardtotal = 0
+
 def main():
     print("Testing player Class")
     player = Player()
